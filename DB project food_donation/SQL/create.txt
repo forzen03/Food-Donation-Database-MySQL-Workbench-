@@ -1,0 +1,86 @@
+create schema food_donation_system;
+*************************************************************
+CREATE TABLE Donor (
+    donorId NUMERIC(7) PRIMARY KEY,
+    donorName VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    email VARCHAR(100)
+);
+
+CREATE TABLE DonationAreas (
+    donationArea VARCHAR(100),
+    donorId NUMERIC(7),
+    FOREIGN KEY (donorId) REFERENCES Donor(donorId),
+    PRIMARY KEY (donationArea, donorId)
+);
+
+CREATE TABLE FoodItem (
+    itemId NUMERIC(7) PRIMARY KEY,
+    itemName VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    quantity NUMERIC(7) NOT NULL,
+    storageInstruction varchar(255),
+    expiryDate TIMESTAMP NOT NULL,
+    donorId NUMERIC(7),
+    FOREIGN KEY (donorId) REFERENCES Donor(donorId)
+);
+
+CREATE TABLE DonationRequest (
+    requestId NUMERIC(7),
+    donorId NUMERIC(7),
+    status VARCHAR(20) NOT NULL,
+    comments varchar(255),
+    requestDate TIMESTAMP NOT NULL,
+    itemId NUMERIC(7),
+    FOREIGN KEY (donorId) REFERENCES Donor(donorId),
+    FOREIGN KEY (itemId) REFERENCES FoodItem(itemId),
+    PRIMARY KEY (requestId, donorId)
+);
+
+CREATE TABLE Recipient (
+    recipId NUMERIC(7) PRIMARY KEY,
+    recipName VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    category VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Documents (
+    document VARCHAR(100),
+    recipId NUMERIC(7),
+    FOREIGN KEY (recipId) REFERENCES Recipient(recipId),
+    PRIMARY KEY (document, recipId)
+);
+
+CREATE TABLE Volunteer (
+    volunteerId NUMERIC(7) PRIMARY KEY,
+    voluntName VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    address VARCHAR(255) NOT NULL,
+    availability VARCHAR(255)
+);
+
+CREATE TABLE Phones (
+    phone VARCHAR(20),
+    volunteerId NUMERIC(7),
+    FOREIGN KEY (volunteerId) REFERENCES Volunteer(volunteerId),
+    PRIMARY KEY (phone, volunteerId)
+);
+
+CREATE TABLE DeliveryRecord (
+    deliveryId NUMERIC(7),
+    requestId NUMERIC(7),
+    donorId NUMERIC(7),
+    driverFName VARCHAR(100) NOT NULL,
+    driverLName VARCHAR(100) NOT NULL,
+    deliveryDate TIMESTAMP NOT NULL,
+    outcome VARCHAR(50) NOT NULL,
+    recipId NUMERIC(7),
+    volunteerId NUMERIC(7),
+    FOREIGN KEY (requestId, donorId) REFERENCES DonationRequest(requestId, donorId),
+    FOREIGN KEY (recipId) REFERENCES Recipient(recipId),
+    FOREIGN KEY (volunteerId) REFERENCES Volunteer(volunteerId),
+    PRIMARY KEY (deliveryId, requestId, donorId)
+);

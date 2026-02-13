@@ -1,0 +1,89 @@
+Inserts : 
+
+INSERT INTO Donor (donorId, donorName, phone, address, email) VALUES
+(1, 'City Mall', '0791234567', '123 Main St, Amman', 'contact@citymall.com'),
+(2, 'Mecca Mall', '0797654321', '456 King St, Amman', 'info@meccamall.com'),
+(3, 'Safeway Supermarket', '0795551234', '789 Queen Ave, Irbid', 'support@safeway.com'),
+(4, 'Sameh Mall', '0796667890', '321 Palace Rd, Amman', 'donations@samehmall.com'),
+(5, 'Taj Mall', '0798889999', '654 Commercial St, Amman', 'manager@tajmall.com'),
+(6, 'Carrefour Jordan', '0792223344', '111 Garden Blvd, Zarqa', 'info@carrefour.jo');
+
+
+INSERT INTO DonationAreas (donationArea, donorId) VALUES
+('Amman - Abdali', 1),
+('Amman - Sweifieh', 1),
+('Amman - Mecca St', 2),
+('Irbid - Downtown', 3),
+('Amman - Shmeisani', 4),
+('Amman - Jabal Amman', 4),
+('Amman - Abdoun', 5),
+('Zarqa - City Center', 6);
+
+
+INSERT INTO FoodItem (itemId, itemName, category, quantity, storageInstruction, expiryDate, donorId) VALUES
+(1, 'Bread', 'Bakery', 50, 'Keep in cool dry place', '2026-01-05 18:00:00', 1),
+(2, 'Rice', 'Prepared Food', 20, 'Refrigerate immediately', '2026-01-03 12:00:00', 2),
+(3, 'Canned Beans', 'Canned Goods', 100, 'Store at room temperature', '2027-06-15 00:00:00', 3),
+(4, 'Apples', 'Produce', 30, 'Keep refrigerated', '2026-01-08 00:00:00', 3),
+(5, 'Sandwiches', 'Prepared Food', 25, 'Keep frozen', '2026-01-10 00:00:00', 4),
+(6, 'Milk', 'Dairy', 40, 'Refrigerate at 4°C', '2026-01-06 00:00:00', 5),
+(7, 'Pasta', 'Dry Goods', 80, 'Store in dry place', '2027-12-31 00:00:00', 6),
+(8, 'Cheese', 'Dairy', 15, 'Keep refrigerated', '2026-01-15 00:00:00', 2);
+
+
+INSERT INTO DonationRequest (requestId, donorId, status, comments, requestDate, itemId) VALUES
+(1, 1, 'Approved', 'Urgent - expires soon', '2026-01-01 09:00:00', 1),
+(2, 2, 'Pending', 'Available for pickup tomorrow', '2026-01-01 10:30:00', 2),
+(3, 3, 'Approved', 'Large donation - needs truck', '2026-01-01 11:00:00', 3),
+(4, 3, 'Completed', 'Successfully delivered', '2025-12-30 14:00:00', 4),
+(5, 4, 'Approved', 'Frozen meals ready', '2026-01-01 08:00:00', 5),
+(6, 5, 'Rejected', 'Expired items included', '2025-12-29 16:00:00', 6),
+(7, 6, 'Approved', 'Dry goods - long shelf life', '2026-01-01 13:00:00', 7);
+
+
+INSERT INTO Recipient (recipId, recipName, email, category, location, phone) VALUES
+(1, 'Hope Community Center', 'info@hopecenter.org', 'NGO', 'Amman - Jabal Hussein', '0791111111'),
+(2, 'Caring Hearts Foundation', 'contact@caringhearts.org', 'NGO', 'Zarqa - East District', '0792222222'),
+(3, 'Ahmad Family', 'ahmad.family@email.com', 'Individual', 'Irbid - North Area', '0793333333'),
+(4, 'Children Shelter', 'admin@childrenshelter.org', 'Shelter', 'Amman - Marka', '0794444444'),
+(5, 'Refugee Center', 'help@refugeecenter.org', 'NGO', 'Aqaba - Downtown', '0795555555'),
+(6, 'Elderly Care Home', 'info@elderlycare.org', 'Care Home', 'Madaba - City Center', '0796666666');
+
+
+INSERT INTO Documents (document, recipId) VALUES
+('Registration Certificate', 1),
+('Tax Exemption Letter', 1),
+('NGO License 2025', 2),
+('Identity Verification', 3),
+('Facility License', 4),
+('Government Approval', 4),
+('UNHCR Registration', 5),
+('Health Permit', 6);
+
+INSERT INTO Volunteer (volunteerId, voluntName, email, address, availability) VALUES
+(1, 'Mohammed Ali', 'mohammed.ali@email.com', '100 Main St, Amman', 'Monday-Friday 9AM-5PM'),
+(2, 'Sara Ahmed', 'sara.ahmed@email.com', '200 Second St, Zarqa', 'Weekends only'),
+(3, 'Khaled Hassan', 'khaled.h@email.com', '300 Third Ave, Irbid', 'Monday, Wednesday, Friday'),
+(4, 'Layla Ibrahim', 'layla.ib@email.com', '400 Fourth Rd, Amman', 'Tuesday-Thursday 2PM-8PM'),
+(5, 'Omar Mahmoud', 'omar.m@email.com', '500 Fifth St, Aqaba', 'Flexible - All week'),
+(6, 'Fatima Nasser', 'fatima.n@email.com', '600 Sixth Ave, Madaba', 'Weekdays 10AM-3PM');
+
+INSERT INTO Phones (phone, volunteerId) VALUES
+('0791000001', 1),
+('0797000001', 1),
+('0792000002', 2),
+('0793000003', 3),
+('0798000003', 3),
+('0794000004', 4),
+('0795000005', 5),
+('0796000006', 6),
+('0799000006', 6);
+
+
+INSERT INTO DeliveryRecord (deliveryId, requestId, donorId, driverFName, driverLName, deliveryDate, outcome, recipId, volunteerId) VALUES
+(1, 1, 1, 'Mohammed', 'Ali', '2026-01-02 10:00:00', 'Delivered', 1, 1),
+(2, 3, 3, 'Khaled', 'Hassan', '2026-01-02 14:00:00', 'Delivered', 2, 3),
+(3, 4, 3, 'Sara', 'Ahmed', '2025-12-31 11:00:00', 'Delivered', 3, 2),
+(4, 5, 4, 'Omar', 'Mahmoud', '2026-01-02 09:00:00', 'Pending', 4, 5),
+(5, 7, 6, 'Layla', 'Ibrahim', '2026-01-02 15:00:00', 'Delivered', 5, 4),
+(6, 2, 2, 'Fatima', 'Nasser', '2026-01-03 10:00:00', 'Pending', 6, 6);
